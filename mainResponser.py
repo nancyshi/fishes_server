@@ -19,7 +19,7 @@ def tcplinkHandler(sock,addr,dataMgr,configsDict):
         jsonData = dataMgr.queryInitData(playerId,configsDict)
         sock.send(bytes(jsonData,"utf-8"))
     else:
-        print("not correct contenData")
+        print("not correct contenData , reveived data is %s" % contenData.decode("utf-8"))
     sock.close()
     
     

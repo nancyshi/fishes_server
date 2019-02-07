@@ -9,7 +9,7 @@
             },
             {
                 "fishId": 10002,
-                "probability": 300,
+                "probability": 5000,
                 "timeDelta": 3
             }
         ]
