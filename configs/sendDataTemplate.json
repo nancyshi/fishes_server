@@ -1,0 +1,25 @@
+{
+    "playerData": {
+        "currentDollor": 100,
+        "currentAreaLevel": 1,
+        "boatLevel": 5
+    },
+    "neededFishesConfigs":[
+        {
+            "fishId": 10001,
+            "probability":10000,
+            "timeDelta":0.5,
+            "fishModelName": "fish001",
+            "basicDollor": 10,
+            "currentDollor": 100
+        },
+        {
+            "fishId": 10002,
+            "probability":10000,
+            "timeDelta":0.2,
+            "fishModelName": "fish002",
+            "basicDollor": 20,
+            "currentDollor": 200
+        }
+    ]
+}

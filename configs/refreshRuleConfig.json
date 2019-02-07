@@ -1,0 +1,30 @@
+[
+    {
+        "areaId": 1,
+        "rules": [
+            {
+                "fishId": 10001,
+                "probability": 10000,
+                "timeDelta": 0.5
+            },
+            {
+                "fishId": 10002,
+                "probability": 300,
+                "timeDelta": 3
+            }
+        ]
+    },
+    {
+        "areaId": 2,
+        "rules": [
+            {
+                "fishId": 10001,
+                "probability": 100
+            },
+            {
+                "fishId": 10002,
+                "probability": 300
+            }
+        ]
+    }
+]
