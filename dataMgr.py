@@ -1,5 +1,6 @@
 import json
 import configMgr
+import sqlite3
 class PlayerData(object):
 
     def __init__(self, id):
@@ -8,7 +9,24 @@ class PlayerData(object):
         self.currentAreaLevel = 1
         self.boatLevel = 1
     def setupPlayerDataFromDB(self):
-        pass
+        conn = sqlite3.connect("fish.db")
+        cursor = conn.cursor()
+
+        #search if there is one record of given playerId
+        cursor.execute("select * from user where id = ?",(self.id,))
+        playerDBData = cursor.fetchall()
+        if len(playerDBData) >= 1:
+            playerDBData = playerDBData[0]
+            self.currentDollor = playerDBData[1]
+            self.currentAreaLevel = playerDBData[2]
+            self.boatLevel = playerDBData[3]
+        else:
+            print("there is no filted record of player data ")
+        cursor.close()
+        conn.commit()
+        conn.close()
+
+
     def exchangeToDic(self):
         dic = {}
         dic["id"] = self.id
@@ -21,13 +39,10 @@ class DataMgr(object):
     
     def __init__(self):
         self.datas = {}
+
     def queryInitData(self,playerId,configsDict):
-        #get player data
-        if self.datas.get(playerId) == None:
-            onePlayerData = PlayerData(playerId)
-            onePlayerData.setupPlayerDataFromDB()
-            self.datas[playerId] = onePlayerData
-        playerData = self.datas[playerId]
+        
+        playerData = self.getPlayerDataById(playerId)
         #get needed fishes data
         neededFishesData = self.getNeededFishesConfig(playerData,configsDict)
 
@@ -68,6 +83,83 @@ class DataMgr(object):
 
     def getCurrentFishDollorByFishId(self,givenFishId,basicDollor,playerData):
         return basicDollor * 10
+
+    def getPlayerDataById(self,playerId):
+        if self.datas.get(playerId) == None:
+            onePlayerData = PlayerData(playerId)
+            onePlayerData.setupPlayerDataFromDB()
+            self.datas[playerId] = onePlayerData
+        playerData = self.datas[playerId]
+        return playerData
             
+    def updatePlayerData(self,dataDic):
+        playerId = dataDic["id"]
+        playerData = self.getPlayerDataById(playerId)
+        for key in dataDic:
+            if key == "id":
+                pass
+            elif key == "currentDollor":
+                playerData.currentDollor = int(dataDic[key])
+            elif key == "currentAreaLevel":
+                playerData.currentAreaLevel = int(dataDic[key])
+            elif key == "boatLevel":
+                playerData.boatLevel = int(dataDic[key])
+            else:
+                print("erro in updatePlayerData: wrong key of dataDic %s" % key)
+        
+    def checkDBInfo(self):
+        conn = sqlite3.connect("fish.db")
+        cursor = conn.cursor()
+        sqlCheckTableExist = "select tbl_name from sqlite_master where type = ? and name = ?" 
+        sqlCreatUser = "create table user(id int primary key, currentDollor int, currentAreaLevel int,boatLevel int)"
+        cursor.execute(sqlCheckTableExist,("table","user"))
+        values = cursor.fetchall()
+        if len(values) >= 1 :
+            #user table exist
+            print("user table exist")
+        else:
+            cursor.execute(sqlCreatUser)   
+            print("creat user table")
+        cursor.close()
+        conn.close()
+        return True  
+
+    def writePlayerDataToDB(self):
+        conn = sqlite3.connect("fish.db")
+        cursor = conn.cursor()
+        for key,value in self.datas.items():
+            #key: playerId   value: playerData
+            cursor.execute("select * from user where id = ?",(value.id,))
+            resultNum = cursor.fetchall()
+            resultNum = len(resultNum)
+            if resultNum >= 1:
+                #there is already have a record of this player
+                cursor.execute("update user set currentDollor = ? , currentAreaLevel = ? , boatLevel = ? where id = ?",(value.currentDollor,value.currentAreaLevel,value.boatLevel,value.id))
+                print("update a record")
+            else:
+                #just don't have a record of this player
+                cursor.execute("insert into user values (? , ? , ? , ?)",(value.id,value.currentDollor,value.currentAreaLevel,value.boatLevel))
+                print("insert a record")
+        cursor.close()
+        conn.commit()
+        conn.close()
+
+    def allDBRecords(self):
+        conn = sqlite3.connect("fish.db")
+        cursor = conn.cursor()
+        cursor.execute("select * from user")
+        results = cursor.fetchall()
+        cursor.close()
+        conn.commit()
+        conn.close()
+        return results
+
+    def testInsertOneRecord(self):
+        conn = sqlite3.connect("fish.db")
+        cursor = conn.cursor()
+        cursor.execute("insert into user (id,currentDollor,currentAreaLevel,boatLevel) values (10002,200,1,1)")
+        cursor.close()
+        conn.commit()
+        conn.close()        
 
 dataMgr = DataMgr()
