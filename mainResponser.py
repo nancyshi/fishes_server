@@ -16,6 +16,7 @@ PORT = 8000
 class RequestTypeEnum(Enum):
     getInitData = "GID"
     updatePlayerData = "UPD"
+    login = "LOIN"
 
 def tcplinkHandler(sock,addr,dataMgr,configsDict):
     backMessageHeader = "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\n\r\n"

@@ -143,23 +143,6 @@ class DataMgr(object):
         cursor.close()
         conn.commit()
         conn.close()
-
-    def allDBRecords(self):
-        conn = sqlite3.connect("fish.db")
-        cursor = conn.cursor()
-        cursor.execute("select * from user")
-        results = cursor.fetchall()
-        cursor.close()
-        conn.commit()
-        conn.close()
-        return results
-
-    def testInsertOneRecord(self):
-        conn = sqlite3.connect("fish.db")
-        cursor = conn.cursor()
-        cursor.execute("insert into user (id,currentDollor,currentAreaLevel,boatLevel) values (10002,200,1,1)")
-        cursor.close()
-        conn.commit()
-        conn.close()        
+     
 
 dataMgr = DataMgr()

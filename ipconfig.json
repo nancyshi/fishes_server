@@ -1,0 +1,7 @@
+{
+    "ip": "127.0.0.1",
+    "ports":{
+        "playerDataService": 8001,
+        "playerLoginService": 8002
+    }
+}
