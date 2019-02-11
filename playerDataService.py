@@ -13,20 +13,15 @@ class PlayerDataService(Service):
         backMessageHeader = "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
 
         data = sock.recv(1024)
-        # data = data.decode("utf-8")
-
-        # splitedData = data.split("\r\n\r\n")
-        # if len(splitedData) != 3:
-        #     print("playerDataService erro: received an invalid data from %s" % addr)
-        #     return
-        # header, requestInfo, requestBody = splitedData
-
-        # splitedRequestInfo = requestInfo.split("\r\n")
-        # if len(splitedRequestInfo) != 2:
-        #     print("playerDataService erro: received an invalid requestInfo from %s" % addr)
-        #     return
-        # requestType, playerId = splitedRequestInfo
-        header, requestType, playerId, requestBody = self.splitData(data)
+        try:
+            header, requestType, playerId, requestBody = self.splitData(data)
+        except:
+            backMessageHeader = "HTTP/1.1 600 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+            backMessage = backMessageHeader + "InvalidData"
+            sock.send(bytes(backMessage,"utf-8"))
+            sock.close()
+            print("%s received some invalid data , which is %s" % (self.__class__.__name__,data))
+            return
         if requestType == requestTypeEnum.PlayerDataReqType.getInitData.value:
             jsonData = dataMgr.queryInitData(playerId,configsDict)
             jsonData = backMessageHeader + jsonData

@@ -8,7 +8,15 @@ class LoginService(Service):
 
     def handller(self, sock, addr):
         data = sock.recv(1024)
-        header, requestType, token, requestBody = self.splitData(data)
+        try:
+            header, requestType, token, requestBody = self.splitData(data)
+        except:
+            backMessageHeader = "HTTP/1.1 600 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+            backMessage = backMessageHeader + "InvalidData"
+            sock.send(bytes(backMessage,"utf-8"))
+            sock.close()
+            print("%s received some invalid data , which is %s" % (self.__class__.__name__,data))
+            return
         if requestType == requestTypeEnum.LoginReqType.login.value:
             
             userID = self.getUserIdByToken(token)
