@@ -8,10 +8,22 @@ class LoginService(Service):
 
     def handller(self, sock, addr):
         data = sock.recv(1024)
+        print("data is %s" % data)
+        # buffer = []
+        # while True:
+        #     print("call ")
+        #     d = sock.recv(1024)
+        #     if d and len(d) > 0:
+        #         print("now d is : %s" % d)
+        #         buffer.append(d)
+        #     else:
+        #         print("else now d is : %s" % d)
+        #         break
+        # data = bytes("","utf-8").join(buffer)
         try:
             header, requestType, token, requestBody = self.splitData(data)
         except:
-            backMessageHeader = "HTTP/1.1 600 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+            backMessageHeader = "HTTP/1.1 888 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
             backMessage = backMessageHeader + "InvalidData"
             sock.send(bytes(backMessage,"utf-8"))
             sock.close()

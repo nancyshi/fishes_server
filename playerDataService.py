@@ -13,10 +13,18 @@ class PlayerDataService(Service):
         backMessageHeader = "HTTP/1.1 200 OK\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
 
         data = sock.recv(1024)
+        # buffer = []
+        # while True:
+        #     d = sock.recv(1024)
+        #     if d and len(d) > 0:
+        #         buffer.append(d)
+        #     else:
+        #         break
+        # data = bytes("","uft-8").join(buffer)
         try:
             header, requestType, playerId, requestBody = self.splitData(data)
         except:
-            backMessageHeader = "HTTP/1.1 600 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
+            backMessageHeader = "HTTP/1.1 888 InvalidData\r\nAccess-Control-Allow-Origin: *\r\n\r\n"
             backMessage = backMessageHeader + "InvalidData"
             sock.send(bytes(backMessage,"utf-8"))
             sock.close()
