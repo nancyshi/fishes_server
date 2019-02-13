@@ -1,12 +1,7 @@
-from dataMgr import dataMgr
-from playerDataService import playerDataService
-from loginService import loginService
-import threading
 
-def startOneService(service):
-    t = threading.Thread(target=service.start)
-    t.start()
+from TornadoLoginService import tornadoLoginService
+from dataMgr import dataMgr
 
 dataMgr.checkDBInfo()
-startOneService(playerDataService)
-startOneService(loginService)
+tornadoLoginService.port = tornadoLoginService.prots["playerLoginService"]
+tornadoLoginService.start()
