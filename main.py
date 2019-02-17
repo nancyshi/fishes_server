@@ -1,7 +1,8 @@
 
-from TornadoLoginService import tornadoLoginService
+from requestResponser import requestResponser
 from dataMgr import dataMgr
 
 dataMgr.checkDBInfo()
-tornadoLoginService.port = tornadoLoginService.prots["playerLoginService"]
-tornadoLoginService.start()
+dataMgr.startAutoSaveDataToDB()
+requestResponser.port = requestResponser.prots["playerLoginService"]
+requestResponser.start()

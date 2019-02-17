@@ -1,6 +1,7 @@
 import json
 import configMgr
 import sqlite3
+import schedule
 class PlayerData(object):
 
     def __init__(self, id):
@@ -143,6 +144,12 @@ class DataMgr(object):
         cursor.close()
         conn.commit()
         conn.close()
+
+    def startAutoSaveDataToDB(self,timeDelta = 1):
+        '''time delta is mesured by minitue 
+        '''
+        schedule.every(timeDelta).minutes.do(self.writePlayerDataToDB)
+        self.datas = {}
      
 
 dataMgr = DataMgr()
