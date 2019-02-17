@@ -126,6 +126,7 @@ class DataMgr(object):
         return True  
 
     def writePlayerDataToDB(self):
+        print("excute save db")
         conn = sqlite3.connect("fish.db")
         cursor = conn.cursor()
         for key,value in self.datas.items():
@@ -144,12 +145,12 @@ class DataMgr(object):
         cursor.close()
         conn.commit()
         conn.close()
+        self.datas = {}
 
     def startAutoSaveDataToDB(self,timeDelta = 1):
         '''time delta is mesured by minitue 
         '''
         schedule.every(timeDelta).minutes.do(self.writePlayerDataToDB)
-        self.datas = {}
      
 
 dataMgr = DataMgr()
