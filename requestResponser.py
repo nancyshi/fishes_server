@@ -2,7 +2,6 @@ from TornadoService import TornadoService
 import tornado.web
 from dataMgr import dataMgr
 from configMgr import configsDict
-import json
 import tornado.escape
 
 class BassHandler(tornado.web.RequestHandler):
@@ -46,6 +45,7 @@ class UpdatePlayerDataHandller(BassHandler):
         self.write("success")
         self.flush()
         self.finish()
+
 
 
 requestResponser = TornadoService([
