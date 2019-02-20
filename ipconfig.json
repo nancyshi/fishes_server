@@ -3,5 +3,6 @@
     "ports":{
         "playerDataService": 8001,
         "playerLoginService": 8002
-    }
+    },
+    "port": 8002
 }

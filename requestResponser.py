@@ -3,6 +3,7 @@ import tornado.web
 from dataMgr import dataMgr
 from configMgr import configsDict
 import tornado.escape
+from gameLogic import gameLogic
 
 class BassHandler(tornado.web.RequestHandler):
     def get_json_argument(self, name, default = None):
@@ -38,18 +39,34 @@ class GetInitDataHandller(BassHandler):
 class UpdatePlayerDataHandller(BassHandler):
     def post(self):
         playerDatasForChange = self.get_json_argument("datasForChange")
-        # print("playerDatasForChange is : %s" % playerDatasForChange)
-        # dic = json.loads(playerDatasForChange)
         dataMgr.updatePlayerData(playerDatasForChange)
 
         self.write("success")
         self.flush()
         self.finish()
 
+class HeartCheckHandller(BassHandler):
+    def post(self):
+        self.write("ok")
+        self.flush()
+        self.finish()
+
+class GameLogicHandller(BassHandler):
+    def post(self):
+        requestType = self.get_json_argument("requestType")
+        if requestType == "catchFish":
+            ids = self.get_json_argument("ids")
+            playerId = self.get_json_argument("playerId")
+            gameLogic.catchFish(playerId,*ids)
+            self.write("ok")
+            self.flush()
+            self.finish()
 
 
 requestResponser = TornadoService([
     (r"/",MainHandller),
     (r"/getinitdata",GetInitDataHandller),
     (r"/updateplayerdata",UpdatePlayerDataHandller),
+    (r"/heartcheck",HeartCheckHandller),
+    (r"/gameLogic",GameLogicHandller)
 ])

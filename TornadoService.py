@@ -3,7 +3,8 @@ import tornado.web
 from ipConfigMgr import ipConfigMgr
 
 class TornadoService(tornado.web.Application):
-    prots = ipConfigMgr["ports"]
+    port = ipConfigMgr["port"]
+
 
     def start(self):
         self.listen(self.port,"0.0.0.0")
