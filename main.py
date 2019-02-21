@@ -1,8 +1,8 @@
 
-from requestResponser import requestResponser
+from wsResponser import wsResponser
 from dataMgr import dataMgr
 
 
 dataMgr.checkDBInfo()
 dataMgr.startAutoSaveDataToDB()
-requestResponser.start()
+wsResponser.start()

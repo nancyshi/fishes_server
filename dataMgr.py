@@ -152,5 +152,9 @@ class DataMgr(object):
         '''
         schedule.every(timeDelta).minutes.do(self.writePlayerDataToDB)
      
-
+    def login(self,token):
+        '''
+        return the current player's id
+        '''
+        return 10001
 dataMgr = DataMgr()
