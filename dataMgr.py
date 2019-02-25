@@ -1,7 +1,7 @@
 import json
 import configMgr
 import sqlite3
-import schedule
+from threading import Timer
 class PlayerData(object):
 
     def __init__(self, id):
@@ -126,10 +126,10 @@ class DataMgr(object):
         return True  
 
     def writePlayerDataToDB(self):
-        print("excute save db")
+        print("save player data to db")
         conn = sqlite3.connect("fish.db")
         cursor = conn.cursor()
-        for key,value in self.datas.items():
+        for value in self.datas.values():
             #key: playerId   value: playerData
             cursor.execute("select * from user where id = ?",(value.id,))
             resultNum = cursor.fetchall()
@@ -137,20 +137,21 @@ class DataMgr(object):
             if resultNum >= 1:
                 #there is already have a record of this player
                 cursor.execute("update user set currentDollor = ? , currentAreaLevel = ? , boatLevel = ? where id = ?",(value.currentDollor,value.currentAreaLevel,value.boatLevel,value.id))
-                print("update a record")
+                
             else:
                 #just don't have a record of this player
                 cursor.execute("insert into user values (? , ? , ? , ?)",(value.id,value.currentDollor,value.currentAreaLevel,value.boatLevel))
-                print("insert a record")
+                
         cursor.close()
         conn.commit()
         conn.close()
-        self.datas = {}
 
     def startAutoSaveDataToDB(self,timeDelta = 1):
-        '''time delta is mesured by minitue 
+        '''time delta is mesured by second 
         '''
-        schedule.every(timeDelta).minutes.do(self.writePlayerDataToDB)
+        self.writePlayerDataToDB()
+        t = Timer(timeDelta,self.startAutoSaveDataToDB,args=(timeDelta,))
+        t.start()
      
     def login(self,token):
         '''

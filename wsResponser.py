@@ -48,7 +48,10 @@ class WsHandller(BaseSocketHandller):
                 jsonStr = json.dumps(dic)
                 self.write_message(jsonStr)
 
-        
+    def on_close(self):
+         if dataMgr.datas.get(self.playerId) != None:
+             dataMgr.datas.pop(self.playerId)
+         
             
     def check_origin(self,origin):
         return True
