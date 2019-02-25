@@ -5,6 +5,7 @@ import tornado.escape
 from dataMgr import dataMgr
 from configMgr import configsDict
 from gameLogic import gameLogic
+import json
 
 class BaseSocketHandller(WebSocketHandler):
     def getJsonArgument(self,name,default = None):
@@ -20,10 +21,12 @@ class BaseSocketHandller(WebSocketHandler):
 
 class WsHandller(BaseSocketHandller):
     playerId = None
-    def on_message(self):
-        messageType = self.getJsonArgument("type")
+    def on_message(self,message):
+        
+        messageDic = json.loads(message)
+        messageType = messageDic["type"]
         if messageType == "login":
-            token = self.getJsonArgument("token")
+            token = messageDic["token"]
             uid = dataMgr.login(token)
             self.playerId = uid
             data = dataMgr.queryInitData(uid,configsDict)  
@@ -31,17 +34,19 @@ class WsHandller(BaseSocketHandller):
                 "type": "login",
                 "data": data
             }
-            self.write_message(dic)
+            jsonStr = json.dumps(dic)
+            self.write_message(jsonStr)
 
         elif messageType == "catchFish":
-            fishId = self.getJsonArgument("fishId")
+            fishId = messageDic["fishId"]
             if self.playerId != None :
                 gameLogic.catchFish(self.playerId,fishId)
                 dic = {
                     "type": "catchFish",
                     "currentDollor": dataMgr.getPlayerDataById(self.playerId).currentDollor
                 }
-                self.write_message(dic)
+                jsonStr = json.dumps(dic)
+                self.write_message(jsonStr)
 
         
             
