@@ -121,6 +121,14 @@ class DataMgr(object):
         else:
             cursor.execute(sqlCreatUser)   
             print("creat user table")
+
+        cursor.execute(sqlCheckTableExist,("table","userinfo"))
+        values = cursor.fetchall()
+        if len(values) >= 1:
+            print("userinfo table exist")
+        else:
+            cursor.execute("create table userinfo(id int primary key, username text, accountname text, password text)")
+            print("creat userinfo table")
         cursor.close()
         conn.close()
         return True  
@@ -157,5 +165,18 @@ class DataMgr(object):
         '''
         return the current player's id
         '''
+        
+        if token["origin"] == "localUser":
+            tokenStr = token["token"]
+            userName , passWord = tokenStr.split("&")
+            
+            
+            pass
+        elif token["origin"] == "weChat":
+            pass
         return 10001
+
+    def signUp(self,**kv):
+        
+        pass
 dataMgr = DataMgr()
