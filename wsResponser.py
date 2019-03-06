@@ -48,6 +48,18 @@ class WsHandller(BaseSocketHandller):
                 jsonStr = json.dumps(dic)
                 self.write_message(jsonStr)
 
+        elif messageType == "changeArea":
+            areaId = messageDic["areaId"]
+            gameLogic.changeArea(self.playerId,areaId)
+            data = dataMgr.queryInitData(self.playerId,configsDict)
+            dic = {
+                "type": "changeArea",
+                #"currentDollor": dataMgr.getPlayerDataById(self.playerId).currentDollor,
+                #"currentAreaLevel": dataMgr.getPlayerDataById(self.playerId).currentAreaLevel
+                "data": data
+            }
+            jsonStr = json.dumps(dic)
+            self.write_message(jsonStr)
     def on_close(self):
          if dataMgr.datas.get(self.playerId) != None:
              dataMgr.datas.pop(self.playerId)

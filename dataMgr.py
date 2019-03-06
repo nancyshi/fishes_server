@@ -40,16 +40,23 @@ class DataMgr(object):
     
     def __init__(self):
         self.datas = {}
+        self.configsDict = {}
 
     def queryInitData(self,playerId,configsDict):
         
         playerData = self.getPlayerDataById(playerId)
         #get needed fishes data
         neededFishesData = self.getNeededFishesConfig(playerData,configsDict)
+        self.configsDict = configsDict
+        refreshRules = configsDict["configs/refreshRuleConfig.json"]
+        nextAreaEnterDollor = self.getEnterDollorByAreaLevel(playerData.currentAreaLevel + 1,refreshRules)
 
         resultDic = {}
         resultDic["playerData"] = playerData.exchangeToDic()
         resultDic["neededFishesData"] = neededFishesData
+        resultDic["othersData"] = {
+            "nextAreaEnterDollor": nextAreaEnterDollor
+        }
         jsonStr = json.dumps(resultDic,indent=4)
         return jsonStr
 
@@ -57,6 +64,18 @@ class DataMgr(object):
         for element in refreshRules:
             if element["areaId"] == givenAreaLevel:
                 return element["rules"]
+
+    def getEnterDollorByAreaLevel(self,givenAreaLevel,refreshRules):
+        for element in refreshRules:
+            if element["areaId"] == givenAreaLevel:
+                return element["enterDollor"]
+
+    def getNextEnterDollorByPlayerId(self,givenPlayerId):
+        playerData = self.getPlayerDataById(givenPlayerId)
+        refreshRules = self.configsDict["configs/refreshRuleConfig.json"]
+        nextAreaEnterDollor = self.getEnterDollorByAreaLevel(playerData.currentAreaLevel + 1,refreshRules)
+        return nextAreaEnterDollor
+        
 
     def getOneNeededFishConfig(self,givenFishId,fishConfig):
         for element in fishConfig:
