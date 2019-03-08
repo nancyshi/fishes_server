@@ -35,7 +35,7 @@ class GameLogic(object):
                 }
                 dataMgr.updatePlayerData(dic)
                 
-
+    
                 
 
 gameLogic = GameLogic()

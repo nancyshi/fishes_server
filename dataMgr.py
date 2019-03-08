@@ -9,6 +9,10 @@ class PlayerData(object):
         self.currentDollor = 100
         self.currentAreaLevel = 1
         self.boatLevel = 1
+        self.fishRodLevel = 0
+        self.fishFoodLevel = 0
+        self.fishValueLevel = 0
+
     def setupPlayerDataFromDB(self):
         conn = sqlite3.connect("fish.db")
         cursor = conn.cursor()
@@ -21,6 +25,9 @@ class PlayerData(object):
             self.currentDollor = playerDBData[1]
             self.currentAreaLevel = playerDBData[2]
             self.boatLevel = playerDBData[3]
+            self.fishRodLevel = playerDBData[4]
+            self.fishFoodLevel = playerDBData[5]            
+            self.fishValueLevel = playerDBData[6]
         else:
             print("there is no filted record of player data ")
         cursor.close()
@@ -34,6 +41,9 @@ class PlayerData(object):
         dic["currentDollor"] = self.currentDollor
         dic["currentAreaLevel"] = self.currentAreaLevel
         dic["boatLevel"] = self.boatLevel
+        dic["fishRodLevel"] = self.fishRodLevel
+        dic["fishFoodLevel"] = self.fishFoodLevel
+        dic["fishValueLevel"] = self.fishValueLevel
         return dic
 
 class DataMgr(object):
@@ -131,7 +141,7 @@ class DataMgr(object):
         conn = sqlite3.connect("fish.db")
         cursor = conn.cursor()
         sqlCheckTableExist = "select tbl_name from sqlite_master where type = ? and name = ?" 
-        sqlCreatUser = "create table user(id int primary key, currentDollor int, currentAreaLevel int,boatLevel int)"
+        sqlCreatUser = "create table user(id int primary key, currentDollor int, currentAreaLevel int,boatLevel int, fishRodLevel int, fishFoodLevel int, fishValueLevel int)"
         cursor.execute(sqlCheckTableExist,("table","user"))
         values = cursor.fetchall()
         if len(values) >= 1 :

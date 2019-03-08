@@ -1,0 +1,302 @@
+[
+    {
+        "id": 10001,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 1,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10002,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 2,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10003,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 3,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10004,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 4,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10005,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 5,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10006,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 6,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10007,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 7,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10008,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 8,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10009,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 9,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10010,
+        "boatLevel": 1,
+        "intensifyType": "fishRod",
+        "level": 10,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10011,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 1,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10012,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 2,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10013,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 3,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10014,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 4,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10015,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 5,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10016,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 6,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10017,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 7,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 20
+    },
+    {
+        "id": 10018,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 8,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 30
+    },
+    {
+        "id": 10019,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 9,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 30
+    },
+    {
+        "id": 10020,
+        "boatLevel": 1,
+        "intensifyType": "fishFood",
+        "level": 10,
+        "neededDollor": 1000,
+        "fetureType": "fishRate",
+        "Parameter1": 1,
+        "Parameter2": 30
+    },
+    {
+        "id": 10021,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 1,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 5
+    },
+    {
+        "id": 10022,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 2,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 5
+    },
+    {
+        "id": 10023,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 3,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 5
+    },
+    {
+        "id": 10024,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 4,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10025,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 5,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10026,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 6,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10027,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 7,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 10
+    },
+    {
+        "id": 10028,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 8,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 15
+    },
+    {
+        "id": 10029,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 9,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 15
+    },
+    {
+        "id": 10030,
+        "boatLevel": 1,
+        "intensifyType": "fishValue",
+        "level": 10,
+        "neededDollor": 1000,
+        "fetureType": "fishValue",
+        "Parameter1": 1,
+        "Parameter2": 15
+    }
+]

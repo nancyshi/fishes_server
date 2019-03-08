@@ -6,6 +6,7 @@ from dataMgr import dataMgr
 from configMgr import configsDict
 from gameLogic import gameLogic
 import json
+from intensify import intensify
 
 class BaseSocketHandller(WebSocketHandler):
     def getJsonArgument(self,name,default = None):
@@ -57,6 +58,16 @@ class WsHandller(BaseSocketHandller):
                 #"currentDollor": dataMgr.getPlayerDataById(self.playerId).currentDollor,
                 #"currentAreaLevel": dataMgr.getPlayerDataById(self.playerId).currentAreaLevel
                 "data": data
+            }
+            jsonStr = json.dumps(dic)
+            self.write_message(jsonStr)
+
+        elif messageType == "intensifyBoat":
+            intensifyType = messageDic["intensifyType"]
+            intensify.boatIntensify(self.playerId,intensifyType)
+            dic = {
+                "type": "intensifyBoat",
+                "data": "success"
             }
             jsonStr = json.dumps(dic)
             self.write_message(jsonStr)
