@@ -64,7 +64,7 @@ class WsHandller(BaseSocketHandller):
 
         elif messageType == "intensifyBoat":
             intensifyType = messageDic["intensifyType"]
-            intensify.boatIntensify(self.playerId,intensifyType)
+            intensify.boatIntensify(self.playerId,intensifyType,dataMgr)
             dic = {
                 "type": "intensifyBoat",
                 "data": "success"

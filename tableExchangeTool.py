@@ -12,12 +12,15 @@ for oneCol in range(0,titleNum):
     titles.append(title)
 
 result = []
-for row in range(1,sheet.nrows):
+for row in range(2,sheet.nrows):
     dic = {}
     for col in range(0, sheet.ncols):
         oneTitle = titles[col]
         value = sheet.cell(row,col).value
-        if oneTitle == "id" or oneTitle == "boatLevel" or oneTitle == "level" or oneTitle == "neededDollor" or oneTitle == "Parameter1" or oneTitle == "Parameter2":
+        # if oneTitle == "id" or oneTitle == "boatLevel" or oneTitle == "level" or oneTitle == "neededDollor" or oneTitle == "Parameter1" or oneTitle == "Parameter2":
+        #     value = int(value)
+        valueType = sheet.cell(1,col).value
+        if valueType == "int":
             value = int(value)
         dic[oneTitle] = value
     result.append(dic)

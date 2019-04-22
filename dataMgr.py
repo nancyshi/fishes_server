@@ -2,6 +2,7 @@ import json
 import configMgr
 import sqlite3
 from threading import Timer
+from intensify import intensify
 class PlayerData(object):
 
     def __init__(self, id):
@@ -28,6 +29,7 @@ class PlayerData(object):
             self.fishRodLevel = playerDBData[4]
             self.fishFoodLevel = playerDBData[5]            
             self.fishValueLevel = playerDBData[6]
+            
         else:
             print("there is no filted record of player data ")
         cursor.close()
@@ -60,12 +62,14 @@ class DataMgr(object):
         self.configsDict = configsDict
         refreshRules = configsDict["configs/refreshRuleConfig.json"]
         nextAreaEnterDollor = self.getEnterDollorByAreaLevel(playerData.currentAreaLevel + 1,refreshRules)
+        clientBoatIntensifyInfo = intensify.getClientBoatIntensifyInfoById(playerId,self)
 
         resultDic = {}
         resultDic["playerData"] = playerData.exchangeToDic()
         resultDic["neededFishesData"] = neededFishesData
         resultDic["othersData"] = {
-            "nextAreaEnterDollor": nextAreaEnterDollor
+            "nextAreaEnterDollor": nextAreaEnterDollor,
+            "clientBoatIntensifyInfo": clientBoatIntensifyInfo
         }
         jsonStr = json.dumps(resultDic,indent=4)
         return jsonStr
@@ -173,11 +177,11 @@ class DataMgr(object):
             resultNum = len(resultNum)
             if resultNum >= 1:
                 #there is already have a record of this player
-                cursor.execute("update user set currentDollor = ? , currentAreaLevel = ? , boatLevel = ? where id = ?",(value.currentDollor,value.currentAreaLevel,value.boatLevel,value.id))
+                cursor.execute("update user set currentDollor = ? , currentAreaLevel = ? , boatLevel = ? , fishRodLevel = ? , fishFoodLevel = ? , fishValueLevel = ? where id = ?",(value.currentDollor,value.currentAreaLevel,value.boatLevel,value.fishRodLevel,value.fishFoodLevel,value.fishValueLevel,value.id))
                 
             else:
                 #just don't have a record of this player
-                cursor.execute("insert into user values (? , ? , ? , ?)",(value.id,value.currentDollor,value.currentAreaLevel,value.boatLevel))
+                cursor.execute("insert into user values (? , ? , ? , ? , ? , ? , ?)",(value.id,value.currentDollor,value.currentAreaLevel,value.boatLevel,value.fishRodLevel,value.fishFoodLevel,value.fishValueLevel))
                 
         cursor.close()
         conn.commit()
